@@ -316,49 +316,49 @@
 // }
 
 // 第k大元素
-// class Solution {
+class Solution {
 
-//     function findKthLargest($nums,$k) {
-//         $count = count($nums);
-//         if ($count < $k) return false;
-//         $kBig = $this->quickSort($nums,0,$count-1,$k-1);
-//         return $kBig;
-//     }
+    function findKthLargest($nums,$k) {
+        $count = count($nums);
+        if ($count < $k) return false;
+        $r = $this->quickSort($nums,0,$count-1,$k-1);
+        return $r;
+    }
 
-//     // 快排
-//     private function quickSort(&$nums,$l,$r,$k) {
-//         if ($l < $r) {
-//             $p = $this->partition($nums,$l,$r);
-//             if ($p == $k) {
-//                 return $nums[$p];
-//             } elseif($p > $k) {
-//                 return $this->quickSort($nums,$l,$p-1,$k);
-//             } else {
-//                 return $this->quickSort($nums,$p+1,$r,$k);
-//             }
-//         }
-//         return $nums[$l];
-//     }
+    // 快排
+    private function quickSort(&$nums,$l,$r,$k) {
+        if ($l < $r) {
+            $p = $this->partition($nums,$l,$r);
+            if ($p == $k) {
+                return $nums[$p];
+            } elseif ($p < $k) {
+                return $this->quickSort($nums,$p+1,$r,$k);
+            } else {
+                return $this->quickSort($nums,$l,$p-1,$k);
+            }
+        }
+        return $nums[$l];
+    }
 
-//     // 分区
-//     private function partition(&$nums,$l,$r) {
-//         $random = rand($l,$r); // 优化快排
-//         list($nums[$l], $nums[$random]) = [$nums[$random],$nums[$l]];
-//         $v = $nums[$l];
-//         $j = $l;
-//         for ($i=$l+1; $i <=$r ; $i++) {
-//             if ($nums[$i] > $v) {
-//                 $j++; // 防止i循环完之后赋值越界
-//                 list($nums[$j],$nums[$i]) = [$nums[$i],$nums[$j]];
-//             }
-//         }
-//         $nums[$l] = $nums[$j];
-//         $nums[$j] = $v;
-//         return $j;
-//     }
-// }
-// $n = new Solution();
-// echo $n->findKthLargest([3,2,1,5,6,4],2);
+    // 分区
+    private function partition(&$nums,$l,$r) {
+        $rand = rand($l,$r);
+        list($nums[$l],$nums[$rand]) = [$nums[$rand],$nums[$l]];
+        $v = $nums[$l];
+        $j = $l;
+        for($i = $l+1; $i<= $r;$i++) {
+            if ($nums[$i] > $v) {
+                $j++;
+                list($nums[$j],$nums[$i]) = [$nums[$i],$nums[$j]];
+            }
+        }
+        $nums[$l] = $nums[$j];
+        $nums[$j] = $v;
+        return $j;
+    }
+}
+$n = new Solution();
+echo $n->findKthLargest([3,2,1,5,6,4],3);
 
 // 两个数组的中位数
 // class Solution {
@@ -422,7 +422,7 @@
 
 // 删除数组中的重复项 k是可以重复的次数
 // function removeDuplicates(&$nums,$k) {
-//     $j = 0; // 前一各不重复的数
+//     $j = 0; // 前一个不重复的数
 //     foreach ($nums as $i => $value) {
 //         if ($i<$k || $value > $nums[$i-$k]) {
 //             $nums[$j] = $value;
@@ -448,3 +448,115 @@
 // $nums = [1,1,2];
 // var_dump(removeDuplicates($nums,1));
 // var_dump($nums);
+
+// 最大公约数
+// function maxCommonDivisor($a,$b) {
+//   if ($b == 0) return $a;
+//   return  maxCommonDivisor($b,($a%$b));
+// }
+
+// echo maxCommonDivisor(4,6);
+
+// 最小公倍数
+//求最小公倍数 满足的答案(最大公约数)*[最小公倍数]=a*b (a,b)*[a,b]=a*b
+//如果要求多个数的最小公倍数，可以先求出前两个数的最小公倍数，在依次与后面进行求
+// function min_multiple($a,$b) {
+//   return ($a*$b)/maxCommonDivisor($a,$b);
+// }
+
+// echo min_multiple(4,6);
+
+// 链表反转
+// class Solution {
+
+//     /**
+//      * @param ListNode $head
+//      * @return ListNode
+//      */
+//     function reverseList($head) {
+//         if ($head == null || $head->next == null) return $head;
+
+//         $curr = $this->reverseList($head->next);
+//         $head->next->next=$head;
+//         $head->next=null;
+
+//         return $curr;
+//     }
+// }
+
+// 反转二叉树
+// class Solution {
+
+//     /**
+//      * @param TreeNode $root
+//      * @return TreeNode
+//      */
+//     function invertTree($root) {
+//         if ($root == null) return $root;
+//         $left = $this->invertTree($root->left);
+//         $right = $this->invertTree($root->right);
+
+//         $temp = $left;
+//         $root->left = $right;
+//         $root->right = $temp;
+
+//         return $roo;
+//     }
+// }
+
+//有效的括号
+// class Solution {
+
+//     /**
+//      * @param String $s
+//      * @return Boolean
+//      */
+//     function isValid($s) {
+//         $right = ['('=>')','{'=>'}','['=>']']; // map关系
+//         $stack = []; //入栈
+//         for($i=0;$i<strlen($s);$i++) {
+//             if (array_search($s[$i],$right)) {
+//                 $l = array_pop($stack);
+//                 if (empty($l)) return false;
+//                 if ($right[$l] != $s[$i]) return false;
+//             } else {
+//                 array_push($stack,$s[$i]);
+//             }
+//         }
+//         if ($stack) return false;
+//         return true;
+//     }
+// }
+
+// $n = new Solution;
+// echo $n->isValid("{[]}");
+
+//滑动窗口最大值
+// class Solution {
+
+//     /**
+//      * @param Integer[] $nums
+//      * @param Integer $k
+//      * @return Integer[]
+//      */
+//     // function maxSlidingWindow($nums, $k) {
+//     //     $max = [];
+//     //     for($i=0;$i<=count($nums)-$k;$i++) {
+//     //         $max[] = max(array_slice($nums,$i,$k));
+//     //     }
+//     //     return $max;
+//     // }
+//     function maxSlidingWindow($nums, $k) {
+//         $queue = []; // 双向队列维持在k个元素，以索引为值
+//         $ret   = []; // 结果
+//         for ($i=0; $i < count($nums); $i++) {
+//             while (!empty($queue) && ($nums[end($queue)] < $nums[$i])) array_pop($queue); // 删除小的元素
+//             $queue[] = $i;
+//             if ($queue[0] < $i+1-$k) array_shift($queue); // 删除不在窗口内的元素
+//             if ($i+1 >= $k) $ret[] = $nums[$queue[0]];
+//         }
+//         return $ret;
+//     }
+// }
+// $n = new Solution;
+// var_dump($n->maxSlidingWindow([7,2,4],2));
