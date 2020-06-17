@@ -194,23 +194,96 @@
 //     }
 // }
 
-// N叉树的后序遍历
-class Solution {
-    /**
-     * @param Node $root
-     * @return integer[]
-     */
-    function postorder($root) {
-        $res = [];
-        $this->post($root,$res)
-        $res[] = $root->val;
-        return $res;
-    }
-    function post($root,&$res) {
-        if ($root == null) return $res;
-        for($i=count($root->children)-1;$i>=0;--$i) {
-            $res = $this->post($root->children[$i],$res);
-            $res[] = $root->children[$i]->val;
-        }
-    }
-}
+// N叉树的后序遍历 https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/
+// class Solution {
+//     /**
+//      * @param Node $root
+//      * @return integer[]
+//      */
+//     function postorder($root) {
+//         $res = [];
+//         $this->post($root,$res)
+//         $res[] = $root->val;
+//         return $res;
+//     }
+//     function post($root,&$res) {
+//         if ($root == null) return $res;
+//         for($i=count($root->children)-1;$i>=0;--$i) {
+//             $res = $this->post($root->children[$i],$res);
+//             $res[] = $root->children[$i]->val;
+//         }
+//     }
+// }
+
+// N叉树的前序遍历 https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/description/
+// class Solution {
+//     /**
+//      * @param Node $root
+//      * @return integer[]
+//      */
+//     function preorder($root) {
+//         $res = [];
+//         $this->pre($root,$res);
+//         return $res;
+//     }
+//     function pre($root,&$res) {
+//         if ($root == null) return;
+//         $res[] = $root->val;
+//         for($i=0;$i<count($root->children);$i++) {
+//             $this->pre($root->children[$i],$res);
+//         }
+//     }
+// }
+
+// N叉树的层序遍历 https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
+// class Solution {
+//     /**
+//      * @param Node $root
+//      * @return integer[][]
+//      */
+//     function levelOrder($root) {
+//         if ($root == null) return [];
+//         $ret = [];
+//         $queue = new \SplQueue();
+//         $queue->enqueue($root);
+//         while (!$queue->isEmpty()) {
+//             $len = $queue->count();
+//             $tmp = [];
+//             for($i=0;$i<$len;$i++) {
+//                 $node = $queue->dequeue();
+//                 $tmp[] = $node->val;
+//                 foreach ($node->children as $children) {
+//                     $queue->enqueue($children);
+//                 }
+//             }
+//             $ret[] = $tmp;
+//         }
+//         return $ret;
+//     }
+// }
+
+//二叉树的层序遍历
+// class Solution {
+//     /**
+//      * @param TreeNode $root
+//      * @return Integer[][]
+//      */
+//     function levelOrder($root) {
+//         if ($root == null) return [];
+//         $queue = new \SplQueue();
+//         $queue->enqueue($root);
+//         $ret = [];
+//         while (!$queue->isEmpty()) {
+//             $count = $queue->count();
+//             $tmp   = [];
+//             for($i=0;$i<$count;$i++) {
+//                 $node  = $queue->dequeue();
+//                 $tmp[] = $node->val;
+//                 if ($node->left) $queue->enqueue($node->left);
+//                 if ($node->right) $queue->enqueue($node->right);
+//             }
+//             $ret[] = $tmp;
+//         }
+//         return $ret;
+//     }
+// }
