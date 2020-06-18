@@ -287,3 +287,60 @@
 //         return $ret;
 //     }
 // }
+
+// 最小的k个数
+    // 直接排序
+    // 堆排序
+    // 快排的思想
+
+// n个丑数
+//     function nthUglyNumber($n) {
+//         // 三指针 dp
+//         $p2 = $p3 = $p5 = 0;
+//         $dp = array_fill(0, $n, null);
+//         $dp[0] = 1;
+//         for ($i = 1; $i < $n; ++$i) {
+//             $dp[$i] = min($dp[$p2] * 2, $dp[$p3] * 3, $dp[$p5] * 5);
+//             // 不可以使用 if else，会漏掉一些情况
+//             if ($dp[$i] == $dp[$p2] * 2) $p2++;
+//             if ($dp[$i] == $dp[$p3] * 3) $p3++;
+//             if ($dp[$i] == $dp[$p5] * 5) $p5++;
+//         }
+//         var_dump($dp);
+//         return $dp[$n - 1];
+//     }
+
+// echo nthUglyNumber(13);
+
+// 数组移位之后的查找
+function search(&$arr,$v){
+  if(empty($arr)  || !is_numeric($v)) return -1;
+  $sta = 0;
+  $end = count($arr)-1;
+  while($sta <= $end){
+      $mid = floor(($sta+$end)/2);
+      if($arr[$mid] == $v) return $mid;
+      if($v == $arr[$sta]) return $sta;
+      if($v == $arr[$end]) return $end;
+     if($arr[$mid]<$arr[$sta]){
+         if($v>$arr[$mid] && $v<$arr[$sta]){
+             $end = $mid-1;
+         } else {
+             $sta = $mid+1;
+         }
+     } else if($arr[$mid]>$arr[$end]){
+         if($v<$arr[$mid] && $v>$arr[$end]){
+             $sta = $mid+1;
+         } else{
+             $end = $mid-1;
+         }
+     } else if($arr[$mid]>$arr[$sta]) {
+        $end = $mid-1;
+     } else if($arr[$mid] == $arr[$sta]){
+         $sta = $mid+1;
+     }
+ }
+ return -1;
+}
+$arr = array(5,4,3,2,1);
+var_dump(search($arr, 2));
