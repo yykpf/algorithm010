@@ -1,6 +1,6 @@
 <?php
 // 预习
-// 1、有效的字母异位词
+// 1、有效的字母异位词 https://leetcode-cn.com/problems/valid-anagram/description/
 // 直接排序然后进行比较
 // hashMAP 统计字符的频次
 //
@@ -18,7 +18,7 @@
 // $n = new Solution();
 // echo $n->isAnagram("anagram","nagaram");
 
-// 2、二叉树的中序遍历
+// 2、二叉树的中序遍历 https://leetcode-cn.com/problems/binary-tree-inorder-traversal/submissions/
 /**
  * Definition for a binary tree node.
  * class TreeNode {
@@ -54,20 +54,52 @@
      * @return Integer[]
      */
     // function inorderTraversal($root) {
-//         if (null == $root) return [];
-//         $curr  = $root;
-//         $res   = [];
-//         $stack = [];
-//         while ($curr != null || !empty($stack)) {
-//             while ($curr != null) {
-//                 array_push($stack,$curr);
-//                 $curr = $curr->left;
-//             }
-//             $r = array_pop($stack);
-//             $res[] = $r->val;
-//             $curr = $r->right;
+    //     if ($root == null) return [];
+    //     $stack = new \SplStack();
+    //     $curr = $root;
+    //     $ret = [];
+    //     while ($curr != null || !$stack->isEmpty()) {
+    //         while ($curr != null) {
+    //             $stack->push($curr);
+    //             $curr = $curr->left;
+    //         }
+    //         $node = $stack->pop();
+    //         $ret[] = $node->val;
+    //         $curr = $node->right;
+    //     }
+    //     return $ret;
+    // }
+// }
+
+//  二叉树的前序遍历 https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
+// class Solution {
+
+    /**
+     * @param TreeNode $root
+     * @return Integer[]
+     */
+    // function preorderTraversal($root) {
+    //     if ($root == null) return [];
+    //     $r = $root->val;
+    //     $left = [];
+    //     $right = [];
+    //     if ($root->left) $left = $this->preorderTraversal($root->left);
+    //     if ($root->right) $right = $this->preorderTraversal($root->right);
+    //     return array_merge([$r],$left,$right);
+    // }
+    //  迭代实现 根、左、右
+//     function preorderTraversal($root) {
+//         if ($root == null) return [];
+//         $stack = new \SplStack();
+//         $stack->push($root);
+//         $ret = [];
+//         while (!$stack->isEmpty()) {
+//             $node = $stack->pop();
+//             $ret[] = $node->val;
+//             if ($node->right) $stack->push($node->right);
+//             if ($node->left) $stack->push($node->left);
 //         }
-//         return $res;
+//         return $ret;
 //     }
 // }
 
@@ -83,6 +115,28 @@
 //         if (count($arr) < $k) return false;
 //         sort($arr);
 //         return array_slice($arr, 0,$k-1);
+//     }
+// }
+
+// 两数之和 https://leetcode-cn.com/problems/two-sum/description/
+// class Solution {
+
+//     /**
+//      * @param Integer[] $nums
+//      * @param Integer $target
+//      * @return Integer[]
+//      */
+//     function twoSum($nums,$target)
+//     {
+//         if (count($nums) <=1) return [];
+//         $flipNums = array_flip($nums);
+//         for($i=0;$i<count($nums);$i++) {
+//             $diff = $target-$nums[$i];
+//             if (isset($flipNums[$diff]) && $flipNums[$diff] != $i) {
+//                 return [$i,$flipNums[$diff]];
+//             }
+//         }
+//         return [];
 //     }
 // }
 
@@ -138,22 +192,6 @@
 // $n = new Solution();
 // var_dump($n->groupAnagrams([""]));
 
-// N叉树的前序遍历
-// class Solution {
-//     function preorder($root) {
-//         $stack = new SplStack();
-//         $stack->push($root);
-//         $res = [];
-//         while (!$stack->isEmpty()) {
-//             $node = $stack->pop();
-//             $res[] = $node->val;
-//             for($i=count($node->children)-1;$i>=0;--$i) {
-//                 $stack->push($node->children[$i]);
-//             }
-//         }
-//         return $res;
-//     }
-// }
 
 // 验证二叉搜索树
 // class Solution {
@@ -229,34 +267,54 @@
 //     function pre($root,&$res) {
 //         if ($root == null) return;
 //         $res[] = $root->val;
-//         for($i=0;$i<count($root->children);$i++) {
+//         for($i=0;$i<=count($root->children)-1;$i++) {
 //             $this->pre($root->children[$i],$res);
 //         }
 //     }
+
 // }
 
+// N叉树的前序遍历
+// class Solution {
+//     function preorder($root) {
+//         if ($root == null) return [];
+//         $stack = new \SplStack();
+//         $stack->push($root);
+//         $ret = [];
+//         while (!$stack->isEmpty()) {
+//             $node = $stack->pop();
+//             $ret[] = $node->val;
+//             for ($i=count($node->children)-1; $i >=0 ; $i--) {
+//                 $stack->push($node->children[$i]);
+//             }
+//         }
+//         return $ret;
+//     }
+// }
 // N叉树的层序遍历 https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
 // class Solution {
 //     /**
 //      * @param Node $root
 //      * @return integer[][]
+//      * 迭代实现
+//      * 一层一层入队
 //      */
 //     function levelOrder($root) {
 //         if ($root == null) return [];
-//         $ret = [];
 //         $queue = new \SplQueue();
 //         $queue->enqueue($root);
+//         $ret = [];
 //         while (!$queue->isEmpty()) {
-//             $len = $queue->count();
-//             $tmp = [];
-//             for($i=0;$i<$len;$i++) {
+//             $num = [];
+//             $count = $queue->count();
+//             for ($i=0; $i < $count; $i++) {
 //                 $node = $queue->dequeue();
-//                 $tmp[] = $node->val;
-//                 foreach ($node->children as $children) {
+//                 $num[] = $node->val;
+//                 foreach ($node->children as  $children) {
 //                     $queue->enqueue($children);
 //                 }
 //             }
-//             $ret[] = $tmp;
+//             $ret[] = $num;
 //         }
 //         return $ret;
 //     }
@@ -293,54 +351,147 @@
     // 堆排序
     // 快排的思想
 
-// n个丑数
+// 第n个丑数 https://leetcode-cn.com/problems/chou-shu-lcof/
+// class Solution {
+//     /**
+//      * @param Integer $n
+//      * @return Integer
+//      */
 //     function nthUglyNumber($n) {
-//         // 三指针 dp
-//         $p2 = $p3 = $p5 = 0;
-//         $dp = array_fill(0, $n, null);
-//         $dp[0] = 1;
-//         for ($i = 1; $i < $n; ++$i) {
-//             $dp[$i] = min($dp[$p2] * 2, $dp[$p3] * 3, $dp[$p5] * 5);
-//             // 不可以使用 if else，会漏掉一些情况
-//             if ($dp[$i] == $dp[$p2] * 2) $p2++;
-//             if ($dp[$i] == $dp[$p3] * 3) $p3++;
-//             if ($dp[$i] == $dp[$p5] * 5) $p5++;
-//         }
-//         var_dump($dp);
-//         return $dp[$n - 1];
-//     }
+//         // 三个指针走动
+//         $num = [1]; // 存储数组
+//         [$p1,$p2,$p3] = [0,0,0]; // 三个指针
 
+//         for ($i=1; $i <= $n; $i++) {
+//             $p11 = $num[$p1]*2;
+//             $p21 = $num[$p2]*3;
+//             $p31 = $num[$p3]*5;
+//             $num[$i] = min($p11,$p21,$p31);
+//             if ($num[$i] == $p11)  $p1++;
+//             if ($num[$i] == $p21)  $p2++;
+//             if ($num[$i] == $p31)  $p3++;
+//         }
+//         return $num[$n-1];
+//     }
+// }
 // echo nthUglyNumber(13);
 
 // 数组移位之后的查找
-function search(&$arr,$v){
-  if(empty($arr)  || !is_numeric($v)) return -1;
-  $sta = 0;
-  $end = count($arr)-1;
-  while($sta <= $end){
-      $mid = floor(($sta+$end)/2);
-      if($arr[$mid] == $v) return $mid;
-      if($v == $arr[$sta]) return $sta;
-      if($v == $arr[$end]) return $end;
-     if($arr[$mid]<$arr[$sta]){
-         if($v>$arr[$mid] && $v<$arr[$sta]){
-             $end = $mid-1;
-         } else {
-             $sta = $mid+1;
-         }
-     } else if($arr[$mid]>$arr[$end]){
-         if($v<$arr[$mid] && $v>$arr[$end]){
-             $sta = $mid+1;
-         } else{
-             $end = $mid-1;
-         }
-     } else if($arr[$mid]>$arr[$sta]) {
-        $end = $mid-1;
-     } else if($arr[$mid] == $arr[$sta]){
-         $sta = $mid+1;
-     }
- }
- return -1;
+// function search(&$arr,$v){
+//     if(empty($arr)  || !is_numeric($v)) return -1;
+//     $sta = 0;
+//     $end = count($arr)-1;
+//     while($sta <= $end){
+//         $mid = floor(($sta+$end)/2);
+//         if($arr[$mid] == $v) return $mid;
+//         if($v == $arr[$sta]) return $sta;
+//         if($v == $arr[$end]) return $end;
+//         if($arr[$mid]<$arr[$sta]){
+//             if($v>$arr[$mid] && $v<$arr[$sta]){
+//                 $end = $mid-1;
+//             } else {
+//                 $sta = $mid+1;
+//             }
+//         } else if($arr[$mid]>$arr[$end]){
+//             if($v<$arr[$mid] && $v>$arr[$end]){
+//                 $sta = $mid+1;
+//             } else{
+//                 $end = $mid-1;
+//             }
+//         } else if($arr[$mid]>$arr[$sta]) {
+//             $end = $mid-1;
+//         } else if($arr[$mid] == $arr[$sta]){
+//             $sta = $mid+1;
+//         }
+//     }
+//     return -1;
+// }
+
+// 前 K 个高频元素 https://leetcode-cn.com/problems/top-k-frequent-elements/
+// class Solution {
+//     /**
+//      * @param Integer[] $nums
+//      * @param Integer $k
+//      * @return Integer[]
+//      */
+//     // function topKFrequent($nums, $k) {
+//     //     $len = count($nums);
+//     //     if ($len == $k) return $nums;
+//     //     $hash = array_count_values($nums);
+//     //     arsort($hash);
+//     //     $ret = [];
+//     //     $i = 1;
+//     //     foreach ($hash as $key => $value) {
+//     //         $ret[] = $key;
+//     //         if ($i == $k) break;
+//     //         $i++;
+//     //     }
+//     //     return $ret;
+//     // }
+//     //
+//     function topKFrequent($nums, $k) {
+//         if (count($nums) == $k) return $nums;
+//         $hash = array_count_values($nums);
+//         $priorityQueue = new \SplPriorityQueue();
+//         foreach ($hash as $key => $value) {
+//             $priorityQueue->insert($key,$value);
+//         }
+//         $ret = [];
+//         for ($i=0; $i < $k; $i++) {
+//             $ret[] = $priorityQueue->extract();
+//         }
+//         return $ret;
+//     }
+// }
+// $n = new Solution();
+// var_dump($n->topKFrequent([4,1,-1,2,-1,2,3],1));
+//
+
+// 爬楼梯 https://leetcode-cn.com/problems/climbing-stairs/
+// class Solution {
+//     /**
+//      * @param Integer $n
+//      * @return Integer
+//      */
+//     function climbStairs($n) {
+//         $first = 1;
+//         $second = 2;
+//         if ($n == $first) return $first;
+//         for ($i=3;$i<=$n;$i++) {
+//             $third = $first+$second;
+//             $first = $second;
+//             $second= $third;
+//         }
+//         return $second;
+//     }
+// }
+
+// 括号生成 https://leetcode-cn.com/problems/generate-parentheses/
+// class Solution {
+//     *
+//      * @param Integer $n
+//      * @return String[]
+
+//     function generateParenthesis($n) {
+
+//     }
+// }
+
+// Pow(x, n) https://leetcode-cn.com/problems/powx-n/
+class Solution {
+    /**
+     * @param Float $x
+     * @param Integer $n
+     * @return Float
+     */
+    function myPow($x, $n) {
+        return $n >= 0? $this->recursionMyPow($x,$n):1/$this->recursionMyPow($x,-$n);
+    }
+    function recursionMyPow($x, $n) {
+        if ($n == 0) return 1;
+        $haft = $this->recursionMyPow($x,$n >> 1);
+        return ($n%2 == 0)? $haft*$haft:$haft*$haft*$x;
+    }
 }
-$arr = array(5,4,3,2,1);
-var_dump(search($arr, 2));
+$n = new Solution();
+echo $n->myPow(2.00000,-2);
