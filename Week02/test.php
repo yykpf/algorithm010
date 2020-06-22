@@ -346,11 +346,6 @@
 //     }
 // }
 
-// 最小的k个数
-    // 直接排序
-    // 堆排序
-    // 快排的思想
-
 // 第n个丑数 https://leetcode-cn.com/problems/chou-shu-lcof/
 // class Solution {
 //     /**
@@ -445,53 +440,3 @@
 // }
 // $n = new Solution();
 // var_dump($n->topKFrequent([4,1,-1,2,-1,2,3],1));
-//
-
-// 爬楼梯 https://leetcode-cn.com/problems/climbing-stairs/
-// class Solution {
-//     /**
-//      * @param Integer $n
-//      * @return Integer
-//      */
-//     function climbStairs($n) {
-//         $first = 1;
-//         $second = 2;
-//         if ($n == $first) return $first;
-//         for ($i=3;$i<=$n;$i++) {
-//             $third = $first+$second;
-//             $first = $second;
-//             $second= $third;
-//         }
-//         return $second;
-//     }
-// }
-
-// 括号生成 https://leetcode-cn.com/problems/generate-parentheses/
-// class Solution {
-//     *
-//      * @param Integer $n
-//      * @return String[]
-
-//     function generateParenthesis($n) {
-
-//     }
-// }
-
-// Pow(x, n) https://leetcode-cn.com/problems/powx-n/
-class Solution {
-    /**
-     * @param Float $x
-     * @param Integer $n
-     * @return Float
-     */
-    function myPow($x, $n) {
-        return $n >= 0? $this->recursionMyPow($x,$n):1/$this->recursionMyPow($x,-$n);
-    }
-    function recursionMyPow($x, $n) {
-        if ($n == 0) return 1;
-        $haft = $this->recursionMyPow($x,$n >> 1);
-        return ($n%2 == 0)? $haft*$haft:$haft*$haft*$x;
-    }
-}
-$n = new Solution();
-echo $n->myPow(2.00000,-2);

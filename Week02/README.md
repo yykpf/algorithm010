@@ -41,6 +41,11 @@ hash table
             2、依次从根节点向下调整整个堆的结构,一直到队尾即可 (down)
     注意：二叉堆是堆(优先队列 priority_queue)的一种常见的且简单的实现；但并不是最优的实现
 
+最小的k个数
+    直接排序
+    堆排序
+    快排的思想
+
 图的属性
     Graph(V,E)
     V-vertex:点
@@ -62,3 +67,7 @@ hash table
         跟树的最大区别是一定要加 visited，因为会有环
         DFS
         BFS
+
+        最短路径：dijkstra
+            需要使用优先级队列
+            https://www.bilibili.com/video/av25829980?from=search&seid=13391343514095937158
