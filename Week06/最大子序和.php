@@ -41,4 +41,5 @@ class Solution {
 }
 
 $n = new Solution();
-var_dump($n->maxSubArray([-84,2,-3,1]));
+// var_dump($n->maxSubArray([-84,2,-3,1]));
+echo date('Y-m-d H:i:s',1594795026);
