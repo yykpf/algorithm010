@@ -18,31 +18,39 @@
 // 输出：3
 // 解释：最长公共子序列是 "abc"，它的长度为 3。
 
-class Solution {
-    /**
-     * @param String $text1
-     * @param String $text2
-     * @return Integer
-     */
-    function longestCommonSubsequence($text1, $text2) {
-        // 动态规划 状态转移方程 可以画表(table 二维数组)来模拟
-        $m = strlen($text1);
-        $n = strlen($text2);
-        // 构建dp数组
-        $dp  = array_fill(0, $m+1, array_fill(0, $n+1, 0));
-        // 进行状态转移
-        for ($i=1; $i < $m+1; $i++) {
-            for ($j=1; $j < $n+1; $j++) {
-                if ($text1[$i-1] == $text2[$j-1]) {
-                    $dp[$i][$j] = 1+$dp[$i-1][$j-1];
-                } else {
-                    $dp[$i][$j] = max($dp[$i][$j-1],$dp[$i-1][$j]);
-                }
-            }
-        }
+// class Solution {
+//     /**
+//      * @param String $text1
+//      * @param String $text2
+//      * @return Integer
+//      */
+//     function longestCommonSubsequence($text1, $text2) {
+//         // 动态规划 状态转移方程 可以画表(table 二维数组)来模拟
+//         $m = strlen($text1);
+//         $n = strlen($text2);
+//         // 构建dp数组
+//         $dp  = array_fill(0, $m+1, array_fill(0, $n+1, 0));
+//         // 进行状态转移
+//         for ($i=1; $i < $m+1; $i++) {
+//             for ($j=1; $j < $n+1; $j++) {
+//                 if ($text1[$i-1] == $text2[$j-1]) {
+//                     $dp[$i][$j] = 1+$dp[$i-1][$j-1];
+//                 } else {
+//                     $dp[$i][$j] = max($dp[$i][$j-1],$dp[$i-1][$j]);
+//                 }
+//             }
+//         }
 
-        return $dp[$i-1][$j-1];
-    }
-}
-$n = new Solution();
-echo $n->longestCommonSubsequence('abc','a');
+//         return $dp[$i-1][$j-1];
+//     }
+// }
+// $n = new Solution();
+// echo $n->longestCommonSubsequence('abc','a');
+$aa = [
+    'aa' => 'c'
+];
+
+$bb = [
+    'aa' => 'd'
+];
+var_dump(array_merge($aa,$bb));
