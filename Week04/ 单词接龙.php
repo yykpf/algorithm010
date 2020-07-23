@@ -111,7 +111,7 @@ class Solution {
             // nextLevelVisited 在扩散完成以后，会成为新的 beginVisited
             $nextLevelVisited = [];
             foreach ($beginVisited as $word=>$value) {
-                if ($word == $endWord) return $level;
+                if ($word == $endWord) return $step;
                 // 修改每一个字符
                 for ($j=0; $j < $wordLen; $j++) {
                     // 一轮以后应该重置，否则结果不正确

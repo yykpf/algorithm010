@@ -1,4 +1,5 @@
 <?php
+// 字典树(Trie)
 class Trie
 {
     private $tree;
