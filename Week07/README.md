@@ -63,7 +63,8 @@ class Solution {
                         if (isset($hashList[$word])) {
                             if (isset($endVisited[$word])) return $step+1; // 判断是否存在
                             if (empty($visited[$word])) {
-                                $nextLevelVisited[$word] = true;
+                                $nextLevelVisited[$word]
+                                = true;
                                 $visited[$word] = true;
                             }
                         }
@@ -78,3 +79,12 @@ class Solution {
         return 0;
     }
 }
+
+    启发式搜索
+
+        A* search
+            https://shimo.im/docs/8CzMlrcvbWwFXA8r/read
+            BFS 队列改成优先级队列，有一个估价函数
+            估价函数：
+                启发式函数：h(n),它用来评价那些结点最有希望的是一个我们要找的结点，h(n)会返回一个非负实数，也可以认为是从结点n的目标结点路径的估计成本
+                启发式函数是一种告知搜索方向的方法。它提供了一种明智的方法来猜测那个邻居结点会导向一个目标
