@@ -18,11 +18,11 @@ class Solution {
         if ($grid[0][0] || $grid[$n][$m]) return -1;
         if (count($grid) <= 2) return count($grid);
 
-        $d = 2;
+        $d = 1;
         while (!empty($q)) {
             $count = count($q);
-            while ($count--) {
-                $value = array_pop($q);
+            for ($c=0; $c < $count; $c++) {
+                $value = array_shift($q);
                 if($grid[$value[0]][$value[1]] == 1) continue;
                 if($value[0] == $n && $value[1] == $m) return $d;
                 $grid[$value[0]][$value[1]] = 1;
@@ -39,6 +39,13 @@ class Solution {
         return -1;
     }
 }
-$m =[[0,1,0,1,0],[1,0,0,0,1],[0,0,1,1,1],[0,0,0,0,0],[1,0,1,0,0]];
+// $m =[
+// [0,1,0,1,0],
+// [1,0,0,0,1],
+// [0,0,1,1,1],
+// [0,0,0,0,0],
+// [1,0,1,0,0]
+// ];
+$m = [[0,0,0],[1,1,0],[1,1,0]];
 $n = new Solution();
 echo $n->shortestPathBinaryMatrix($m);
