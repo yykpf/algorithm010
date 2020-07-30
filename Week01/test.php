@@ -316,49 +316,49 @@
 // }
 
 // 第k大元素
-// class Solution {
+class Solution {
 
-//     function findKthLargest($nums,$k) {
-//         $count = count($nums);
-//         if ($count < $k) return false;
-//         $r = $this->quickSort($nums,0,$count-1,$k-1);
-//         return $r;
-//     }
+    function findKthLargest($nums,$k) {
+        $count = count($nums);
+        if ($count < $k) return false;
+        $r = $this->quickSort($nums,0,$count-1,$k-1);
+        return $r;
+    }
 
-//     // 快排
-//     private function quickSort(&$nums,$l,$r,$k) {
-//         if ($l < $r) {
-//             $p = $this->partition($nums,$l,$r);
-//             if ($p == $k) {
-//                 return $nums[$p];
-//             } elseif ($p < $k) {
-//                 return $this->quickSort($nums,$p+1,$r,$k);
-//             } else {
-//                 return $this->quickSort($nums,$l,$p-1,$k);
-//             }
-//         }
-//         return $nums[$l];
-//     }
+    // 快排
+    private function quickSort(&$nums,$l,$r,$k) {
+        if ($l < $r) {
+            $p = $this->partition($nums,$l,$r);
+            if ($p == $k) {
+                return $nums[$p];
+            } elseif ($p < $k) {
+                return $this->quickSort($nums,$p+1,$r,$k);
+            } else {
+                return $this->quickSort($nums,$l,$p-1,$k);
+            }
+        }
+        return $nums[$l];
+    }
 
-//     // 分区
-//     private function partition(&$nums,$l,$r) {
-//         $rand = rand($l,$r);
-//         list($nums[$l],$nums[$rand]) = [$nums[$rand],$nums[$l]];
-//         $v = $nums[$l];
-//         $j = $l;
-//         for($i = $l+1; $i<= $r;$i++) {
-//             if ($nums[$i] > $v) {
-//                 $j++;
-//                 list($nums[$j],$nums[$i]) = [$nums[$i],$nums[$j]];
-//             }
-//         }
-//         $nums[$l] = $nums[$j];
-//         $nums[$j] = $v;
-//         return $j;
-//     }
-// }
-// $n = new Solution();
-// echo $n->findKthLargest([3,2,1,5,6,4],3);
+    // 分区
+    private function partition(&$nums,$l,$r) {
+        $rand = rand($l,$r);
+        list($nums[$l],$nums[$rand]) = [$nums[$rand],$nums[$l]];
+        $v = $nums[$l];
+        $j = $l;
+        for($i = $l+1; $i<= $r;$i++) {
+            if ($nums[$i] > $v) {
+                $j++;
+                list($nums[$j],$nums[$i]) = [$nums[$i],$nums[$j]];
+            }
+        }
+        $nums[$l] = $nums[$j];
+        $nums[$j] = $v;
+        return $j;
+    }
+}
+$n = new Solution();
+echo $n->findKthLargest([3,2,1,5,6,4],3);
 
 // 两个数组的中位数
 // class Solution {
@@ -532,31 +532,31 @@
 // echo $n->isValid("{[]}");
 
 //滑动窗口最大值
-class Solution {
+// class Solution {
 
-    /**
-     * @param Integer[] $nums
-     * @param Integer $k
-     * @return Integer[]
-     */
-    // function maxSlidingWindow($nums, $k) {
-    //     $max = [];
-    //     for($i=0;$i<=count($nums)-$k;$i++) {
-    //         $max[] = max(array_slice($nums,$i,$k));
-    //     }
-    //     return $max;
-    // }
-    function maxSlidingWindow($nums, $k) {
-        $queue = []; // 双向队列维持在k个元素，以索引为值
-        $ret   = []; // 结果
-        for ($i=0; $i < count($nums); $i++) {
-            while (!empty($queue) && ($nums[end($queue)] < $nums[$i])) array_pop($queue); // 删除小的元素
-            $queue[] = $i;
-            if ($queue[0] < $i+1-$k) array_shift($queue); // 删除不在窗口内的元素
-            if ($i+1 >= $k) $ret[] = $nums[$queue[0]];
-        }
-        return $ret;
-    }
-}
-$n = new Solution;
-var_dump($n->maxSlidingWindow([7,2,4,5,6],2));
+//     /**
+//      * @param Integer[] $nums
+//      * @param Integer $k
+//      * @return Integer[]
+//      */
+//     // function maxSlidingWindow($nums, $k) {
+//     //     $max = [];
+//     //     for($i=0;$i<=count($nums)-$k;$i++) {
+//     //         $max[] = max(array_slice($nums,$i,$k));
+//     //     }
+//     //     return $max;
+//     // }
+//     function maxSlidingWindow($nums, $k) {
+//         $queue = []; // 双向队列维持在k个元素，以索引为值
+//         $ret   = []; // 结果
+//         for ($i=0; $i < count($nums); $i++) {
+//             while (!empty($queue) && ($nums[end($queue)] < $nums[$i])) array_pop($queue); // 删除小的元素
+//             $queue[] = $i;
+//             if ($queue[0] < $i+1-$k) array_shift($queue); // 删除不在窗口内的元素
+//             if ($i+1 >= $k) $ret[] = $nums[$queue[0]];
+//         }
+//         return $ret;
+//     }
+// }
+// $n = new Solution;
+// var_dump($n->maxSlidingWindow([7,2,4,5,6],2));

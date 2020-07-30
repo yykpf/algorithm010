@@ -34,7 +34,7 @@ class Test {
         return $server;
     }
 }
-$serverW = ['A'=>1,'B'=>1,'C'=>1];
+$serverW = ['A'=>5,'B'=>1,'C'=>1];
 
 $t = new Test($serverW);
 echo $t->getServer(),PHP_EOL;
