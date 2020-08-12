@@ -12,6 +12,12 @@
 
 // 如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。
 
+// 1、暴力：n^2
+// 2、DP:
+//     a.分治(子问题)  max_sum(i) = max(max_sum(i-1),0)+a[i]
+//     b.状态数组定义  f(i)
+//     c.DP方程
+// 最大子序和 = 当前元素自身最大 或者 包含之前后最大
 class Solution {
     /**
      * @param Integer[] $nums
@@ -41,5 +47,4 @@ class Solution {
 }
 
 $n = new Solution();
-// var_dump($n->maxSubArray([-84,2,-3,1]));
-echo date('Y-m-d H:i:s',1594795026);
+var_dump($n->maxSubArray([-84,2,-3,1]));

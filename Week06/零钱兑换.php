@@ -21,14 +21,20 @@
 // 链接：https://leetcode-cn.com/problems/coin-change
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
+// 1、暴力：递归
+// 2、BFS
+// 3、DP
+//     a.分治(子问题)
+//     b.状态数组定义  f(n) = min(f(n-k),for k in  [1,2,5])
+//     c.DP方程
 class Solution {
   public function coinChange($coins, $amount) {
     $max = $amount + 1;
     $dp = array_fill(0,$max,$max);
-    $dp[0] = 0;
-    for ($i = 1; $i <= $amount; $i++) {
+    $dp[0] = 0; // 走 0 步
+    for ($i = 1; $i <= $amount; $i++) { // 把之前的步数遍历一次
         for ($j = 0; $j < count($coins); $j++) {
-            if ($coins[$j] <= $i) {
+            if ($coins[$j] <= $i) { // i 表示要凑的面值
                 $dp[$i] = min($dp[$i], $dp[$i - $coins[$j]] + 1);
             }
         }
@@ -38,4 +44,5 @@ class Solution {
 }
 
 $n = new Solution();
-echo $n->coinChange([1, 2, 5],4);
+// echo $n->coinChange([2, 5, 1],4);
+echo time();
