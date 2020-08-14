@@ -31,4 +31,4 @@ class Solution {
     }
 }
 $n = new Solution();
-echo $n->mySqrt(4);
+echo $n->mySqrt(9);
