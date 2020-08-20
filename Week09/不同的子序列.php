@@ -42,6 +42,9 @@
 // babgbag
 //     ^^^
 
+// 题解
+// https://leetcode-cn.com/problems/distinct-subsequences/solution/pythonti-jie-yi-kan-jiu-dong-de-fen-xi-yao-yao-yao/
+
 class Solution {
     /**
      * @param String $s

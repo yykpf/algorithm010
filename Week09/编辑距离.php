@@ -1,5 +1,11 @@
 <?php
 
+// dp方程
+// word1[i] == word2[j] 是相等字符 dp[i][j] = $dp[$i - 1][$j - 1]
+// 不相等
+// $dp[$i - 1][$j]+1 // 要不 word1减一个单词
+// $dp[$i][$j-1]+1   // 要不 word2减一个单词
+// $dp[$i - 1][$j-1]+1 // 要不相等同时减
 class Solution {
   public function minDistance($word1, $word2) {
     $n = strlen($word1);
@@ -13,19 +19,19 @@ class Solution {
 
     // 边界状态初始化
     for ($i = 0; $i < $n + 1; $i++) {
-      $D[$i][0] = $i;
+        $D[$i][0] = $i;
     }
     for ($j = 0; $j < $m + 1; $j++) {
-      $D[0][$j] = $j;
+        $D[0][$j] = $j;
     }
     // 计算所有 DP 值
     for ($i = 1; $i < $n + 1; $i++) {
         for ($j = 1; $j < $m + 1; $j++) {
-            $left = $D[$i - 1][$j] + 1;
-            $down = $D[$i][$j - 1] + 1;
-            $left_down = $D[$i - 1][$j - 1];
-            if ($word1[$i - 1] != $word2[$j - 1]) $left_down += 1;
-            $D[$i][$j] = min($left, min($down, $left_down));
+            if ($word1[$i - 1] == $word2[$j - 1]) {
+                $D[$i][$j] = $D[$i - 1][$j - 1];
+            } else {
+                $D[$i][$j] = min($D[$i - 1][$j - 1], min($D[$i - 1][$j], $D[$i][$j - 1]))+1;
+            }
         }
     }
     return $D[$n][$m];
