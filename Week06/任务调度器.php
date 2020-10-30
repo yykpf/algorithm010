@@ -29,7 +29,6 @@ class Solution {
         $len = count($tasks);
         if ($len <= 1) return $len;
         $taskHash = count_chars(implode($tasks),1);
-
         $taskMax = max($taskHash);
         $residual = 0; // 统计出现一样的次数
         foreach ($taskHash as $key => $value) if ($value == $taskMax) $residual++;

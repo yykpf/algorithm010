@@ -71,6 +71,6 @@ $m = [
   [".",".",".","4","1","9",".",".","5"],
   [".",".",".",".","8",".",".","7","9"]
 ];
-$n = new Solution();
-$n->solveSudoku($m);
-var_dump($m);
+// $n = new Solution();
+// $n->solveSudoku($m);
+// var_dump($m);

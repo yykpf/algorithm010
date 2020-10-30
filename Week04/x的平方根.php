@@ -30,5 +30,8 @@ class Solution {
         return (int)$right;
     }
 }
-$n = new Solution();
-echo $n->mySqrt(9);
+// $n = new Solution();
+// echo $n->mySqrt(9);
+$binary = "101001111110010000011101010100101101010000100000000000000000";
+$hex = (bindec($binary));
+echo $hex;

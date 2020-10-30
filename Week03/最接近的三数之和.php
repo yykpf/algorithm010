@@ -1,4 +1,5 @@
 <?php
+// 三数之和
 class Solution {
     /**
      * @param Integer[] $nums
@@ -11,6 +12,7 @@ class Solution {
         for ($i=0; $i < count($nums); $i++) {
             [$start,$end] = [$i+1,count($nums)-1]; //初始化两个指针
             while ($start < $end) {
+                echo $nums[$start],$nums[$end],$nums[$i],PHP_EOL;
                 $sum = $nums[$start]+$nums[$end]+$nums[$i];
                 if (abs($target-$sum) < abs($target-$ans)) $ans = $sum; // 找到最接近的数，也就是相减比例最小的
                 if ($sum > $target) {

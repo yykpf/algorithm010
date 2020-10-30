@@ -33,4 +33,4 @@ class Solution {
     }
 }
 $n = new Solution();
-echo $n->integerBreak(10);
+echo $n->integerBreak(6);

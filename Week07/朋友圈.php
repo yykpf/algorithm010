@@ -46,7 +46,6 @@ class UnionFind {
         return $p;
     }
     public function union($p, $q) {
-        echo
         $rootP = $this->find($p);
         $rootQ = $this->find($q);
         if ($rootP == $rootQ) return;

@@ -46,4 +46,13 @@ class Solution {
     }
 }
 $n = new Solution();
-var_dump($n->reverseOnlyLetters("7_28]"));
+// var_dump($n->reverseOnlyLetters("7_28]"));
+$a = [
+    '1' => [
+        'aa' => 2,
+    ],
+];
+$b = ['cc'=>1];
+
+
+echo (string)($b['dd']??$a[1]['aa']??0);

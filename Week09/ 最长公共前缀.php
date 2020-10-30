@@ -40,3 +40,4 @@ class Solution {
         return $start;
     }
 }
+echo 81*9;

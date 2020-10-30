@@ -42,10 +42,10 @@ class Solution {
             return;
         }
         if ($c_index == $this->len) return;
-        for ($k=ceil($amount/$this->coins[$c_index]); $k >= 0 && $k+$count < $ans; $k--) { // 可以减去的最大金额的数量
-            $this->DFS(ceil($amount-$k*$this->coins[$c_index]),$c_index+1,$count+$k,$ans); // 回溯检查可以减去的最少数量
+        for ($k=floor($amount/$this->coins[$c_index]); $k >= 0 && $k+$count < $ans; $k--) { // 可以减去的最大金额的数量
+            $this->DFS(floor($amount-$k*$this->coins[$c_index]),$c_index+1,$count+$k,$ans); // 回溯检查可以减去的最少数量
         }
     }
 }
 $n = new Solution();
-echo $n->coinChange([1,7,10],14);
+echo $n->coinChange([1,3,6],7);
