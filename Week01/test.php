@@ -342,7 +342,7 @@ class Solution {
 
     // 分区
     private function partition(&$nums,$l,$r) {
-        $rand = rand($l,$r);
+        $rand = rand($l,$r); // 解决退化的时间复杂度(已经是排好序的，每次选择固定值)
         list($nums[$l],$nums[$rand]) = [$nums[$rand],$nums[$l]];
         $v = $nums[$l];
         $j = $l;

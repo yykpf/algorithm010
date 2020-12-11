@@ -34,53 +34,53 @@
 // 解释: endWord "cog" 不在字典中，所以无法进行转换。
 
 // //  广度优先
-// class Solution {
-//     /**
-//      * @param String $beginWord
-//      * @param String $endWord
-//      * @param String[] $wordList
-//      * @return Integer
-//      */
-//     function ladderLength($beginWord, $endWord, $wordList) {
-//         if ($beginWord == $endWord) return 1;
-//         $hashList = array_flip($wordList);
-//         if (!isset($hashList[$endWord])) return 0; //不存在
-//         unset($hashList[$beginWord]);
-//         $letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-//         $visited[$beginWord] = true;
-//         $level = 1; // 默认1次
-//         $queue = new \SplQueue;
-//         $queue->enqueue($beginWord);
-//         $wordLen = strlen($beginWord);
-//         while (!$queue->isEmpty()) {
-//             $count = $queue->count();
-//             for ($i=0; $i < $count; $i++) {
-//                 $word = $queue->dequeue();
-//                 if ($word == $endWord) return $level;
-//                 // 修改每一个字符
-//                 for ($j=0; $j < $wordLen; $j++) {
-//                     // 一轮以后应该重置，否则结果不正确
-//                     $old = $word[$j];
-//                     foreach ($letters as  $value) {
-//                         if ($old == $value) continue;
-//                         $word[$j] = $value;
-//                         if (isset($hashList[$word])) {
-//                             if ($word == $endWord) return $level+1;
-//                             if (empty($visited[$word])) {
-//                                 $queue->enqueue($word);
-//                                 $visited[$word] = true;
-//                             }
-//                         }
-//                     }
-//                     $word[$j] = $old;
-//                 }
+class Solution {
+    /**
+     * @param String $beginWord
+     * @param String $endWord
+     * @param String[] $wordList
+     * @return Integer
+     */
+    function ladderLength($beginWord, $endWord, $wordList) {
+        if ($beginWord == $endWord) return 1;
+        $hashList = array_flip($wordList);
+        if (!isset($hashList[$endWord])) return 0; //不存在
+        unset($hashList[$beginWord]);
+        $letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+        $visited[$beginWord] = true;
+        $level = 1; // 默认1次
+        $queue = new \SplQueue;
+        $queue->enqueue($beginWord);
+        $wordLen = strlen($beginWord);
+        while (!$queue->isEmpty()) {
+            $count = $queue->count();
+            for ($i=0; $i < $count; $i++) {
+                $word = $queue->dequeue();
+                if ($word == $endWord) return $level;
+                // 修改每一个字符
+                for ($j=0; $j < $wordLen; $j++) {
+                    // 一轮以后应该重置，否则结果不正确
+                    $old = $word[$j];
+                    foreach ($letters as  $value) {
+                        if ($old == $value) continue;
+                        $word[$j] = $value;
+                        if (isset($hashList[$word])) {
+                            if ($word == $endWord) return $level+1;
+                            if (empty($visited[$word])) {
+                                $queue->enqueue($word);
+                                $visited[$word] = true;
+                            }
+                        }
+                    }
+                    $word[$j] = $old;
+                }
 
-//             }
-//             $level++;
-//         }
-//         return 0;
-//     }
-// }
+            }
+            $level++;
+        }
+        return 0;
+    }
+}
 //  双向广度优先
 class Solution {
     /**
@@ -111,7 +111,6 @@ class Solution {
             // nextLevelVisited 在扩散完成以后，会成为新的 beginVisited
             $nextLevelVisited = [];
             foreach ($beginVisited as $word=>$value) {
-                if ($word == $endWord) return $step;
                 // 修改每一个字符
                 for ($j=0; $j < $wordLen; $j++) {
                     // 一轮以后应该重置，否则结果不正确
@@ -137,4 +136,4 @@ class Solution {
     }
 }
 $n = new Solution();
-echo $n->ladderLength("ymain","oecij",["ymann","yycrj","oecij","ymcnj","yzcrj","yycij","xecij","yecij","ymanj","yzcnj","ymain"]);
+echo $n->ladderLength("a","c",["a","b","c"]);

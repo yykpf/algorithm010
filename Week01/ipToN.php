@@ -46,4 +46,5 @@ function longTIp($n) {
     $ip4 = $n & 0xff;
     return $ip1.'.'.$ip2.'.'.$ip3.'.'.$ip4;
 }
-echo nToIp(ipton($ip));
+// echo nToIp(ipton($ip));
+echo longTIp(171753696);

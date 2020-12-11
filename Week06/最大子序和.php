@@ -23,28 +23,29 @@ class Solution {
      * @param Integer[] $nums
      * @return Integer
      */
-    // function maxSubArray($nums) {
-    //     // 贪心算法
-    //     $pre = 0; // 若当前指针所指元素之前的和小于0，则丢弃当前元素之前的数列
-    //     $maxAns = $nums[0]; // 记录最大值
-    //     foreach ($nums as $num) {
-    //         $pre = max($pre+$num,$num);
-    //         $maxAns = max($maxAns,$pre);
-    //     }
-    //     return $maxAns;
-    // }
-
     function maxSubArray($nums) {
-        // 动态规划
-        // 若前一个元素大于0，则将其加到当前元素上
-        for ($i=1; $i < count($nums); $i++) {
-            if ($nums[$i-1] > 0) {
-                $nums[$i] += $nums[$i-1];
-            }
+        // 贪心算法
+        $pre = 0; // 若当前指针所指元素之前的和小于0，则丢弃当前元素之前的数列
+        $maxAns = $nums[0]; // 记录最大值
+        foreach ($nums as $num) {
+            $pre = max($pre+$num,$num);
+            $maxAns = max($maxAns,$pre);
         }
-        return max($nums);
+        return $maxAns;
     }
+
+    // function maxSubArray($nums) {
+    //     // 动态规划
+    //     // 若前一个元素大于0，则将其加到当前元素上
+    //     for ($i=1; $i < count($nums); $i++) {
+    //         if ($nums[$i-1] > 0) {
+    //             $nums[$i] += $nums[$i-1];
+    //         }
+    //     }
+    //     return max($nums);
+    // }
 }
 
 $n = new Solution();
-var_dump($n->maxSubArray([-84,2,-3,1]));
+var_dump($n->maxSubArray([-2,1,-3,4,-1,2,1,-5,4]));
+

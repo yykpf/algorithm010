@@ -24,11 +24,11 @@ function adjustNode($n,$last,&$arr){
     }
     $r = $l+1;  // 右孩子
     // 如果右孩子比左孩子大，则让父节点与右孩子比
-    if( $r<=$last&&$arr[$r]>$arr[$l] ){
+    if( $r<=$last&&$arr[$r]<$arr[$l] ){
         $l = $r;
     }
     // 如果其中子节点$l比父节点$n大，则与父节点$n交换
-    if( $arr[$l]>$arr[$n] ){
+    if( $arr[$l]<$arr[$n] ){
         swap($arr[$l],$arr[$n]);
         // 交换之后，父节点($n)的值可能还小于原子节点($l)的子节点的值，所以还需对原子节点($l)的子节点进行调整，用递归实现
         adjustNode($l, $last, $arr);
@@ -45,7 +45,7 @@ function heapSort(&$arr){
     // 堆排序中常忽略$arr[0]
     array_unshift($arr, 0);
     // 最后一个非叶子节点
-    $i = $last>>1;
+    $i = $last>>1; // /2
     // 整理成最大堆，最大的数放到最顶，并将最大数和堆尾交换，并在之后的计算中，忽略数组最后端的最大数(last)，直到堆顶（last=堆顶）
     while(true){
         adjustNode($i, $last, $arr);
@@ -64,6 +64,6 @@ function heapSort(&$arr){
     // 弹出第一个元素
     array_shift($arr);
 }
-$a = [2,4,1,5,3,6];
+$a = [2,4,1,8,5,3,6];
 heapSort($a);
 var_dump($a);
